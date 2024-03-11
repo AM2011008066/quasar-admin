@@ -49,7 +49,7 @@ const data = [
   {
     name: 'Pratik Patel',
     Crated_Date: '15/3/2020',
-    Project: 'Quasar Admin',
+    Project: 'CARA AEON',
     avatar: 'https://avatars3.githubusercontent.com/u/34883558?s=400&u=09455019882ac53dc69b23df570629fd84d37dd1&v=4',
     progress: 80,
     des: 'Solutions Developer'

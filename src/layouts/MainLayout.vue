@@ -11,21 +11,17 @@
           aria-label="Menu"
         />
         <q-toolbar-title>
-          Quasar App
+          CARA
         </q-toolbar-title>
         <q-space/>
         <div class="q-gutter-sm row items-center no-wrap">
-                    <q-btn round dense flat color="white" :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
-                           @click="$q.fullscreen.toggle()"
-                           v-if="$q.screen.gt.sm">
-                    </q-btn>
-          <q-btn round dense flat color="white" icon="fab fa-github" type="a"
-                 href="https://github.com/pratik227/quasar-admin" target="_blank">
-          </q-btn>
-          <q-btn round dense flat style="color:red !important;" type="a" href="https://github.com/sponsors/pratik227"
-                 target="_blank">
-            <i class="fa fa-heart fa-2x fa-beat"></i>
-          </q-btn>
+        <q-btn round dense flat color="white" icon="fas fa-sign-out-alt" type="a"
+        to="/Login-1" target="_blank">
+        </q-btn>
+        <q-btn round dense flat color="white" :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
+                @click="$q.fullscreen.toggle()"
+                v-if="$q.screen.gt.sm">
+        </q-btn>
           <q-btn round dense flat color="white" icon="notifications">
             <q-badge color="red" text-color="white" floating>
               5

@@ -23,14 +23,85 @@
 </template>
 
 <script>
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue'
+import axios from 'axios'
 
 export default defineComponent({
   name: "CardSocial",
-  props: {
+  props: {   
     icon_position: {
-      required: false,
+      type: String,
       default: "left"
+    }
+  },
+  data() {
+    return {
+      totalusers: '', // Define totalusers data property
+      latestGeneratedSops: [],
+      latestArchiveSops: [],
+      latestOnlineUsers: [],
+      inProgress: '',
+      reviewed: '',
+      approved: ''
+    }
+  },
+  mounted() {
+    this.fetchData();
+  },
+  methods: {
+    async fetchData() {
+      try {
+        await this.getLatestGeneratedSops();
+        await this.getLatestArchiveSops();
+        await this.getLatestOnlineUsers();
+        await this.getTotalUsers();
+        await this.totalsops();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getLatestGeneratedSops() {
+      try {
+        const response = await axios.get('https://api.caramyaeon.com.my/api/latestGeneratedsops');
+        this.latestGeneratedSops = response.data;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getLatestArchiveSops() {
+      try {
+        const response = await axios.get('https://api.caramyaeon.com.my/api/latestarchivesops');
+        this.latestArchiveSops = response.data;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getLatestOnlineUsers() {
+      try {
+        const response = await axios.get('https://api.caramyaeon.com.my/api/onlineUsers');
+        this.latestOnlineUsers = response.data;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getTotalUsers() {
+      try {
+        const response = await axios.get('https://api.caramyaeon.com.my/api/total_users');
+        this.totalusers = response.data.Total_users;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async totalsops() {
+      try {
+        const response = await fetch('https://api.caramyaeon.com.my/api/total_generatesops');
+        const data = await response.json();
+        this.inProgress = data['In-Progress'];
+        this.reviewed = data['Reviewed'];
+        this.approved = data['Approved'];
+      } catch (error) {
+        console.error(error);
+      }
     }
   },
   computed: {
@@ -38,35 +109,42 @@ export default defineComponent({
       return this.icon_position === "left"
         ? [
           {
-            title: "My Account",
+            title: "AEON Employees",
             icon: "person",
-            value: "200",
+            value: this.totalusers,
             color1: "#5064b5",
             color2: "#3e51b5"
           },
           {
-            title: "Followers",
+            title: "Draft SOP",
             icon: "fab fa-twitter",
-            value: "500",
+            value: this.inProgress,
             color1: "#f37169",
             color2: "#f34636"
           },
           {
-            title: "Connections",
+            title: "Reviewed SOP",
             icon: "fab fa-google",
-            value: "50",
+            value: this.reviewed,
             color1: "#ea6a7f",
             color2: "#ea4b64"
           },
           {
-            title: "Website Visits",
+            title: "Approved SOP",
             icon: "bar_chart",
-            value: "1020",
+            value: this.approved,
             color1: "#a270b1",
             color2: "#9f52b1"
           }
         ]
         : [
+          {
+            title: "AEON Employees",
+            icon: "person",
+            value: "300",
+            color1: "#5064b5",
+            color2: "#3e51b5"
+          },
           {
             title: "Monthly Income",
             icon: "fas fa-dollar-sign",

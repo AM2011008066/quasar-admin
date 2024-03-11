@@ -6,7 +6,7 @@
           <q-item-section avatar class="">
             <q-icon color="blue" name="access_time" style="font-size: 2em;"/>
           </q-item-section>
-
+   
           <q-item-section>
             <div class="text-h6">Timeline</div>
           </q-item-section>
